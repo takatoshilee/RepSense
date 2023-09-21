@@ -1,15 +1,11 @@
 # RepSense
-Your Reps, Sensibly Counted                               
-
+Your Reps, Sensibly Counted
 
 ## Overview
 
-RepSense is an innovative fitness tool that leverages advanced pose estimation technology to make your workouts more effective and convenient. Say goodbye to manual rep counting and hello to automated, precise tracking. The project is a fully open-source tracker for fitness tests. ~~It is created because we can't pass our fitness tests~~ 
+RepSense is an innovative fitness tool that leverages advanced pose estimation technology to make your workouts more effective and convenient. Say goodbye to manual rep counting and hello to automated, precise tracking.
 
-
-It is created **to democratize the motion senors used in national fitness tests and make objectively counting reps accessible to all**
-
-With RepSense, you can check your pushups/situps form anywhere, anytime! 
+With RepSense, you can check your pushups/situps form anywhere, anytime!
 
 ## Features
 
@@ -63,6 +59,5 @@ If you encounter any issues or have suggestions for improvement, please [submit 
 ## License
 
 RepSense is released under the [MIT License](LICENSE).
-
 
 ![Real-Time Demostration](https://github.com/.gif)
