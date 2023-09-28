@@ -31,3 +31,30 @@ def main():
             # Recolour back to RGB
             image.flags.writeable = True
             image = cv2.cvtColor(image, cv2.COLOR_RGB2BGR)
+            try:
+                if results.pose_landmarks:
+                    landmarks = results.pose_landmarks.landmark
+
+                    shoulder, elbow, wrist, hip, knee = (
+                        [landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value].x, landmarks[mp_pose.PoseLandmark.LEFT_SHOULDER.value].y],
+                        [landmarks[mp_pose.PoseLandmark.LEFT_ELBOW.value].x, landmarks[mp_pose.PoseLandmark.LEFT_ELBOW.value].y],
+                        [landmarks[mp_pose.PoseLandmark.LEFT_WRIST.value].x, landmarks[mp_pose.PoseLandmark.LEFT_WRIST.value].y],
+                        [landmarks[mp_pose.PoseLandmark.LEFT_HIP.value].x, landmarks[mp_pose.PoseLandmark.LEFT_HIP.value].y],
+                        [landmarks[mp_pose.PoseLandmark.LEFT_KNEE.value].x, landmarks[mp_pose.PoseLandmark.LEFT_KNEE.value].y]
+                    )
+
+                    angle_elbow = calculate_angle(shoulder, elbow, wrist)
+
+                    # Visualize
+                    cv2.putText(image, f"Elbow Angle: {angle_elbow:.3f}", tuple(np.multiply(elbow, [int(capture.get(3)), int(capture.get(4))]).astype(int)),
+                                cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2, cv2.LINE_AA)
+                    cv2.putText(image, f"Hip Angle: {angle_hip:.3f}", tuple(np.multiply(hip, [int(capture.get(3)), int(capture.get(4))]).astype(int)),
+                                cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 0, 0), 2, cv2.LINE_AA)
+
+                    if angle_elbow > 170:
+                        stage = "up"
+                    if angle_elbow < 65 and stage == "up" and angle_hip > 150:
+                        stage = "down"
+                        counter += 1
+            except Exception as e:
+                print(f"Error: {e}")
