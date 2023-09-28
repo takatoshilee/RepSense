@@ -44,6 +44,7 @@ def main():
                     )
 
                     angle_elbow = calculate_angle(shoulder, elbow, wrist)
+                    angle_hip = calculate_angle(shoulder, hip, knee)
 
                     # Visualize
                     cv2.putText(image, f"Elbow Angle: {angle_elbow:.3f}", tuple(np.multiply(elbow, [int(capture.get(3)), int(capture.get(4))]).astype(int)),
@@ -58,3 +59,6 @@ def main():
                         counter += 1
             except Exception as e:
                 print(f"Error: {e}")
+            # Render rectangle with a black border
+            cv2.rectangle(image, (0, 0), (225, 105), (0, 0, 0), 2)
+            cv2.rectangle(image, (0, 0), (225, 105), (58, 152, 250), -1)
